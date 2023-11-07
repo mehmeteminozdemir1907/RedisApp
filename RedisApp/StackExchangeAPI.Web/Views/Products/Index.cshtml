@@ -1,0 +1,30 @@
+﻿@model ProductDto
+@{
+	ViewData["Title"] = "Products";
+}
+
+<h2>Add Product</h2>
+<form method="post" asp-action="Add" enctype="application/x-www-form-urlencoded">
+	Id: <input type="text" asp-for="Product.Id" />
+	Name: <input type="text" asp-for="Product.Name" />
+	Price: <input type="number" asp-for="Product.Price" />
+	<button type="submit">Save</button>
+</form>
+
+@if (Model?.Products.Count != 0)
+{
+	<hr />
+
+	<h2>Products</h2>
+
+	@foreach (var item in Model.Products)
+	{
+		<p>
+			<span><b>ID: </b> @item.Id</span>
+			<span><b>Name: </b> @item.Name</span>
+			<span><b>Price: </b> @item.Price</span>
+			<a asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+		</p>
+	}
+}
+

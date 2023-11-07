@@ -1,0 +1,45 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+	<h4>Add Product to Cache</h4>
+	<form method="post" asp-action="Add" enctype="multipart/form-data">
+		<label>
+			Id (Key)
+			<input type="text" name="Id" />
+		</label>
+		<label>
+			Product Name (Value)
+			<input type="text" name="Name" />
+		</label>
+		<input type="submit" value="Save" />
+	</form>
+</div>
+
+<br />
+<hr />
+
+<div>
+	<h4>Get Product to Cache</h4>
+	<form method="post" asp-action="Get" enctype="multipart/form-data">
+		<label>
+			Id (Key)
+			<input type="text" name="Key" />
+		</label>
+		<input type="submit" value="Get" />
+	</form>
+</div>
+
+<br />
+<hr />
+
+@if (TempData["Data"] != null)
+{
+	<div>
+		<h4>Result</h4>
+		<br />
+		<label>CacheData: @TempData["Data"]</label> <a style='@(TempData["Data"].ToString().Contains("not found") ? "display: none;" : "")' asp-action="Delete" asp-controller="Products" asp-route-key="@TempData["Key"]">Remove</a>
+	</div>
+}
